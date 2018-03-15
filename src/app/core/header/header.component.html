@@ -1,0 +1,31 @@
+<nav class = "navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <!-- remove href="#" to stop request and load page on -->
+            <a routerLink = '/recipes' style="cursor:pointer;" class = "navbar-brand">Receipe Book</a>
+        </div>
+        <div class="navbar-default">
+            <ul class = "nav navbar-nav">
+                <!-- specify click listener for each link on navbar -->
+                <li routerLinkActive="active"><a routerLink='/recipes'>Recipes</a></li>
+                <li routerLinkActive="active"><a routerLink='/shoppingList'>ShoppingList</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <ng-template [ngIf]="!isAuthenticated()">
+                        <li><a routerLink="/signup">Register</a></li>
+                        <li><a routerLink="/signin">Sign In</a></li>
+                </ng-template>
+                
+                <li><a style="cursor:pointer;" (click)="onLogout()" *ngIf = "isAuthenticated()">Logout</a></li>
+                
+                <li class="dropdown" appDropdown *ngIf="isAuthenticated()">
+                    <a style="cursor:pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a style="cursor:pointer;" (click)="onSaveData()">Save Data</a></li>
+                        <li><a style="cursor:pointer;" (click)="onFetchData()">Fetch Data</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
